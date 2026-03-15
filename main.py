@@ -9,8 +9,6 @@ if __name__ == "__main__":
     
     x = torch.randn(B, H, N)
 
-    # TODO: Uncomment each as you implement them
-    # 
     # --- TSMixer ---
     model = TSMixer(H, F_out, N)
     y = model(x)
