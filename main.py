@@ -1,4 +1,5 @@
 from TSMixer import *
+from RPMixer import *
 
 if __name__ == "__main__":
     # Dimensions
@@ -14,3 +15,10 @@ if __name__ == "__main__":
     y = model(x)
     assert y.shape == (B, F_out, N), f"Expected {(B, F_out, N)}, got {y.shape}"
     print(f"TSMixer OK: {y.shape}, params: {sum(p.numel() for p in model.parameters())}")
+
+    # --- RPMixer ---
+    model = RPMixer(H, F_out, N)
+    y = model(x)
+    assert y.shape == (B, F_out, N), f"Expected {(B, F_out, N)}, got {y.shape}"
+    print(f"RPMixer OK: {y.shape}, params: {sum(p.numel() for p in model.parameters())}")
+    
