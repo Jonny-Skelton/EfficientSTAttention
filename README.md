@@ -45,21 +45,18 @@ The first block uses a **frozen** random K (random projection); subsequent block
 
 Four California traffic speed sub-datasets at 5-minute resolution:
 
-| Split | Sensors | Timesteps |
+| Sub-dataset | Sensors (N) | Timesteps |
 |---|---|---|
 | SD (San Diego) | 716 | ~105,000 |
 | GBA (Greater Bay Area) | 2,352 | ~105,000 |
 | GLA (Greater Los Angeles) | 3,834 | ~105,000 |
 | CA (California) | 8,600 | ~105,000 |
 
-Download:
-```bash
-python dataset.py --download --data_root /path/to/data
-```
+Source: https://www.kaggle.com/datasets/liuxu77/largest
 
-Data should be placed (or downloaded) at:
+After download and extraction the layout should be:
 ```
-data/
+<data_root>/
   sd/sd.h5
   gba/gba.h5
   gla/gla.h5
@@ -71,7 +68,48 @@ data/
 ```bash
 conda create -n eiformer python=3.11
 conda activate eiformer
-pip install torch torchvision h5py numpy
+pip install torch torchvision h5py numpy kaggle
+```
+
+## Downloading the dataset on an SSH cluster
+
+The dataset is hosted on Kaggle and must be downloaded via the Kaggle API.
+Follow these steps **once**, then the SLURM script handles the rest automatically.
+
+### Step 1 — Get a Kaggle API token (do this on your local machine)
+
+1. Log in at [kaggle.com](https://www.kaggle.com) and go to **Settings → API → Create New Token**.
+2. This downloads `kaggle.json` to your local machine (usually `~/Downloads/kaggle.json`).
+
+### Step 2 — Copy the token to the cluster
+
+```bash
+# On your local machine:
+ssh <user>@<cluster> "mkdir -p ~/.kaggle"
+scp ~/Downloads/kaggle.json <user>@<cluster>:~/.kaggle/kaggle.json
+
+# On the cluster — restrict permissions (required by the Kaggle CLI):
+chmod 600 ~/.kaggle/kaggle.json
+```
+
+### Step 3 — Download and extract
+
+```bash
+# On the cluster, inside this repo:
+export DATA_ROOT=/scratch/$USER/largeST
+
+python dataset.py --download --data_root $DATA_ROOT
+```
+
+This runs `kaggle datasets download -d liuxu77/largest`, saves `largest.zip` to
+`$DATA_ROOT`, then extracts it in place. The zip is ~10 GB so allow a few minutes.
+If the job is interrupted it will resume from the zip if it was already downloaded.
+
+### Step 4 — Verify
+
+```bash
+ls $DATA_ROOT/sd/ $DATA_ROOT/gba/ $DATA_ROOT/gla/ $DATA_ROOT/ca/
+# Expect: sd.h5  gba.h5  gla.h5  ca.h5
 ```
 
 ## Smoke test
@@ -118,20 +156,28 @@ Results are written as JSON to `results/<model>_<dataset>_h<horizon>.json`.
 
 ## SLURM experiment
 
-Runs all 48 combinations (4 models × 4 datasets × 3 horizons: 15/30/60 min) with at most 16 concurrent jobs:
+Runs all 48 combinations (4 models × 4 datasets × 3 horizons: 15/30/60 min) with at most 16 concurrent jobs.
 
 ```bash
-# Set your scratch path
+# Download data first (see "Downloading the dataset" above)
 export DATA_ROOT=/scratch/$USER/largeST
-
-# Download data first (optional — sbatch script will also do it)
 python dataset.py --download --data_root $DATA_ROOT
 
-# Launch
+# Submit the array job
 sbatch forecast.sbatch
 ```
 
+The array index maps to `(model, dataset, horizon)` as:
+```
+index = model_idx * 12 + dataset_idx * 3 + horizon_idx
+models:   TSMixer, RPMixer, iTransformer, EiFormer
+datasets: SD, GBA, GLA, CA
+horizons: 3, 6, 12 timesteps  (15 min / 30 min / 1 hr)
+```
+
 > **Note:** iTransformer on CA (N≈8,600) is automatically skipped in the SLURM script because O(N²) attention at that scale exceeds GPU memory.
+
+Results land in `results/<model>_<dataset>_h<horizon>.json`. Logs go to `logs/forecast/`.
 
 ## Metrics
 

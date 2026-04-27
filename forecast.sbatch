@@ -64,10 +64,12 @@ mkdir -p logs/forecast results
 
 DATA_ROOT="${DATA_ROOT:-/scratch/$USER/largeST}"
 
-# Download dataset if not already present (runs once per dataset)
+# Download the full LargeST archive if the required sub-dataset is not present.
+# Kaggle delivers one zip for all four sub-datasets, so this only runs once
+# across the whole array (subsequent jobs skip it immediately).
 if [ ! -f "$DATA_ROOT/${DATASET,,}/${DATASET,,}.h5" ]; then
-    echo "Downloading $DATASET ..."
-    python dataset.py --download --data_root "$DATA_ROOT" --datasets "$DATASET"
+    echo "Dataset not found — downloading from Kaggle (requires ~/.kaggle/kaggle.json) ..."
+    python dataset.py --download --data_root "$DATA_ROOT"
 fi
 
 # ---------------------------------------------------------------------------
