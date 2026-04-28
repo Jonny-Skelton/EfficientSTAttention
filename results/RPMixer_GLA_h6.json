@@ -1,0 +1,15 @@
+{
+  "model": "RPMixer",
+  "dataset": "GLA",
+  "horizon": 6,
+  "history": 12,
+  "num_entities": 3834,
+  "n_params": 1020362,
+  "best_epoch": 100,
+  "test_mae": 35.818267822265625,
+  "test_rmse": 57.149452209472656,
+  "test_mape": 25.182601928710938,
+  "val_mae": 29.134958267211914,
+  "val_rmse": 45.336124420166016,
+  "val_mape": 21.12454605102539
+}

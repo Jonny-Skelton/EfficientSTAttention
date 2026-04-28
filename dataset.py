@@ -96,14 +96,26 @@ def download_from_kaggle(data_root):
 
 
 def _check_kaggle_credentials():
+    import json
     cred = os.path.expanduser("~/.kaggle/kaggle.json")
+    token = os.environ.get("KAGGLE_API_TOKEN")
+    if token:
+        # KAGGLE_API_TOKEN may be a JSON blob {"username":..,"key":..} or a bare key string.
+        try:
+            parsed = json.loads(token)
+        except json.JSONDecodeError:
+            parsed = {"username": "", "key": token}
+        os.makedirs(os.path.dirname(cred), exist_ok=True)
+        with open(cred, "w") as f:
+            json.dump(parsed, f)
+        os.chmod(cred, 0o600)
+        return
     if not os.path.exists(cred):
         raise FileNotFoundError(
-            "Kaggle API token not found.\n"
-            "  1. Go to https://www.kaggle.com/settings -> API -> Create New Token\n"
-            "  2. This downloads kaggle.json to your local machine.\n"
-            "  3. Copy it to the cluster:  scp kaggle.json <user>@<cluster>:~/.kaggle/\n"
-            "  4. On the cluster set permissions:  chmod 600 ~/.kaggle/kaggle.json\n"
+            "Kaggle API token not found. Either:\n"
+            "  - Set env var:  export KAGGLE_API_TOKEN=<your_token>\n"
+            "  - Or place credentials at ~/.kaggle/kaggle.json\n"
+            "    (download from https://www.kaggle.com/settings -> API -> Create New Token)\n"
         )
 
 
@@ -117,7 +129,9 @@ def load_h5(path):
         data = f["raw_data"][:]          # (T, N, C) or (T, N)
     if data.ndim == 3:
         data = data[..., 0]              # take speed channel -> (T, N)
-    return data.astype(np.float32)
+    data = data.astype(np.float32)
+    np.nan_to_num(data, nan=0.0, copy=False)  # missing sensors -> 0 (masked in metrics)
+    return data
 
 
 # ---------------------------------------------------------------------------

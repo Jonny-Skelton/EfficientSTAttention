@@ -62,8 +62,9 @@ def masked_rmse(pred, true, null_val=0.0):
     return ((pred - true)[mask] ** 2).mean().sqrt()
 
 
-def masked_mape(pred, true, null_val=0.0):
-    mask = true.abs() > abs(null_val) + 1e-5
+def masked_mape(pred, true, null_val=0.0, speed_min=1.0):
+    # Mask out missing/zero readings and clip denominator to avoid division by sensor artifacts
+    mask = true.abs() > max(abs(null_val), speed_min)
     return ((pred - true).abs() / true.abs())[mask].mean() * 100.0
 
 

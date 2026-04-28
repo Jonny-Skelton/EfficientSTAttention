@@ -1,0 +1,15 @@
+{
+  "model": "TSMixer",
+  "dataset": "GLA",
+  "horizon": 3,
+  "history": 12,
+  "num_entities": 3834,
+  "n_params": 1020323,
+  "best_epoch": 64,
+  "test_mae": 43.91106033325195,
+  "test_rmse": 65.69441223144531,
+  "test_mape": 24.1910343170166,
+  "val_mae": 21.66338539123535,
+  "val_rmse": 32.88802719116211,
+  "val_mape": 14.784820556640625
+}

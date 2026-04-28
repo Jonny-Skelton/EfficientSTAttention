@@ -1,0 +1,15 @@
+{
+  "model": "TSMixer",
+  "dataset": "CA",
+  "horizon": 3,
+  "history": 12,
+  "num_entities": 8600,
+  "n_params": 2288079,
+  "best_epoch": 38,
+  "test_mae": 34.70304870605469,
+  "test_rmse": 50.68221664428711,
+  "test_mape": 28.021516799926758,
+  "val_mae": 22.36236572265625,
+  "val_rmse": 34.41147994995117,
+  "val_mape": 17.56350326538086
+}

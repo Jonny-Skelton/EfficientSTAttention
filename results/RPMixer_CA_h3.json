@@ -1,0 +1,15 @@
+{
+  "model": "RPMixer",
+  "dataset": "CA",
+  "horizon": 3,
+  "history": 12,
+  "num_entities": 8600,
+  "n_params": 2288079,
+  "best_epoch": 96,
+  "test_mae": 30.562265396118164,
+  "test_rmse": 49.98716735839844,
+  "test_mape": 23.76422691345215,
+  "val_mae": 26.236360549926758,
+  "val_rmse": 42.422542572021484,
+  "val_mape": 20.56418228149414
+}

@@ -1,0 +1,15 @@
+{
+  "model": "EiFormer",
+  "dataset": "CA",
+  "horizon": 3,
+  "history": 12,
+  "num_entities": 8600,
+  "n_params": 87427,
+  "best_epoch": 41,
+  "test_mae": 19.09459114074707,
+  "test_rmse": 29.99224281311035,
+  "test_mape": 12.490297317504883,
+  "val_mae": 20.104272842407227,
+  "val_rmse": 31.64898109436035,
+  "val_mape": 12.51944637298584
+}

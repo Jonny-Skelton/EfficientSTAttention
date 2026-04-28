@@ -1,0 +1,15 @@
+{
+  "model": "TSMixer",
+  "dataset": "GBA",
+  "horizon": 3,
+  "history": 12,
+  "num_entities": 2352,
+  "n_params": 626111,
+  "best_epoch": 70,
+  "test_mae": 21.647783279418945,
+  "test_rmse": 32.93221664428711,
+  "test_mape": 14.14232063293457,
+  "val_mae": 21.786027908325195,
+  "val_rmse": 34.0216178894043,
+  "val_mape": 14.121319770812988
+}

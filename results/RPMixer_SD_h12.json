@@ -1,0 +1,15 @@
+{
+  "model": "RPMixer",
+  "dataset": "SD",
+  "horizon": 12,
+  "history": 12,
+  "num_entities": 716,
+  "n_params": 191052,
+  "best_epoch": 45,
+  "test_mae": 27.496009826660156,
+  "test_rmse": 46.0420036315918,
+  "test_mape": 19.792011260986328,
+  "val_mae": 24.444400787353516,
+  "val_rmse": 41.53998947143555,
+  "val_mape": 17.021240234375
+}

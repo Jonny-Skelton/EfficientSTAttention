@@ -1,0 +1,15 @@
+{
+  "model": "iTransformer",
+  "dataset": "SD",
+  "horizon": 12,
+  "history": 12,
+  "num_entities": 716,
+  "n_params": 101580,
+  "best_epoch": 17,
+  "test_mae": 22.84075164794922,
+  "test_rmse": 36.6188850402832,
+  "test_mape": 15.07611083984375,
+  "val_mae": 23.41623878479004,
+  "val_rmse": 37.12602233886719,
+  "val_mape": 14.484331130981445
+}

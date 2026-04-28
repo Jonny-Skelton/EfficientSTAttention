@@ -50,10 +50,9 @@ echo "============================================"
 # Environment
 # ---------------------------------------------------------------------------
 module purge
-module load cuda/12.1 python/3.11
+module load cuda/13.0
 
-# Activate your conda/venv — adjust path as needed
-source "$HOME/miniconda3/etc/profile.d/conda.sh"
+source "/util/opt/anaconda/4.9.2/etc/profile.d/conda.sh"
 conda activate eiformer          # or: source venv/bin/activate
 
 # ---------------------------------------------------------------------------
@@ -62,7 +61,7 @@ conda activate eiformer          # or: source venv/bin/activate
 cd "$SLURM_SUBMIT_DIR"
 mkdir -p logs/forecast results
 
-DATA_ROOT="${DATA_ROOT:-/scratch/$USER/largeST}"
+DATA_ROOT="${DATA_ROOT:-/lustre/work/helab/jonnyskel/data/largeST}"
 
 # Download the full LargeST archive if the required sub-dataset is not present.
 # Kaggle delivers one zip for all four sub-datasets, so this only runs once

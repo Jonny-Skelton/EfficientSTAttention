@@ -1,0 +1,15 @@
+{
+  "model": "RPMixer",
+  "dataset": "GBA",
+  "horizon": 12,
+  "history": 12,
+  "num_entities": 2352,
+  "n_params": 626228,
+  "best_epoch": 78,
+  "test_mae": 31.06240463256836,
+  "test_rmse": 47.83976364135742,
+  "test_mape": 24.018850326538086,
+  "val_mae": 28.144332885742188,
+  "val_rmse": 44.95881652832031,
+  "val_mape": 22.17951011657715
+}

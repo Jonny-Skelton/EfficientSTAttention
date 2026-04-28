@@ -1,0 +1,15 @@
+{
+  "model": "EiFormer",
+  "dataset": "GLA",
+  "horizon": 6,
+  "history": 12,
+  "num_entities": 3834,
+  "n_params": 87622,
+  "best_epoch": 26,
+  "test_mae": 22.664264678955078,
+  "test_rmse": 35.32854461669922,
+  "test_mape": 12.334586143493652,
+  "val_mae": 23.923315048217773,
+  "val_rmse": 37.143184661865234,
+  "val_mape": 12.50586986541748
+}

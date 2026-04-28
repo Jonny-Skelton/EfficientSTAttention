@@ -1,0 +1,15 @@
+{
+  "model": "iTransformer",
+  "dataset": "GBA",
+  "horizon": 6,
+  "history": 12,
+  "num_entities": 2352,
+  "n_params": 101190,
+  "best_epoch": 26,
+  "test_mae": 21.46173667907715,
+  "test_rmse": 34.170528411865234,
+  "test_mape": 13.425029754638672,
+  "val_mae": 22.673667907714844,
+  "val_rmse": 36.74128341674805,
+  "val_mape": 13.700151443481445
+}

@@ -1,0 +1,15 @@
+{
+  "model": "TSMixer",
+  "dataset": "SD",
+  "horizon": 12,
+  "history": 12,
+  "num_entities": 716,
+  "n_params": 191052,
+  "best_epoch": 64,
+  "test_mae": 24.767131805419922,
+  "test_rmse": 40.704288482666016,
+  "test_mape": 17.53655433654785,
+  "val_mae": 22.154706954956055,
+  "val_rmse": 37.38520050048828,
+  "val_mape": 15.143318176269531
+}

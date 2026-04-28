@@ -1,0 +1,15 @@
+{
+  "model": "EiFormer",
+  "dataset": "SD",
+  "horizon": 3,
+  "history": 12,
+  "num_entities": 716,
+  "n_params": 87427,
+  "best_epoch": 44,
+  "test_mae": 19.6258487701416,
+  "test_rmse": 30.887168884277344,
+  "test_mape": 12.890174865722656,
+  "val_mae": 20.275846481323242,
+  "val_rmse": 31.51744842529297,
+  "val_mape": 12.44252872467041
+}

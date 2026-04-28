@@ -1,0 +1,15 @@
+{
+  "model": "EiFormer",
+  "dataset": "GBA",
+  "horizon": 6,
+  "history": 12,
+  "num_entities": 2352,
+  "n_params": 87622,
+  "best_epoch": 38,
+  "test_mae": 23.03458023071289,
+  "test_rmse": 36.12179183959961,
+  "test_mape": 14.096622467041016,
+  "val_mae": 24.337602615356445,
+  "val_rmse": 38.73445129394531,
+  "val_mape": 14.385692596435547
+}
